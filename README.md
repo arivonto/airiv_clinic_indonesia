@@ -35,7 +35,7 @@ A modern, comprehensive Electronic Medical Record (RME) and Clinic Management su
 The complete clinical workflow was verified under live Odoo 18.0 Community conditions:
 
 1. **Patient Registration**: Registered patient `Bambang Sudarsono` with 16-digit NIK `3171012345670002` and verified SatuSehat IHIS ID generation.
-2. **SOAP Clinical Encounter**: Processed encounter `ENC-202608-0001` with vital signs (BP 110/70, Temp 38.5°C), automated BMI computation ($68\text{ kg} / 1.7\text{ m}^2 = 23.53\text{ kg/m}^2$), and primary diagnosis **ICD-10 A09** (*Gastroenteritis and colitis of unspecified origin*).
+2. **SOAP Clinical Encounter**: Processed encounter `ENC-202608-0002` with vital signs (BP 110/70, Temp 38.5°C), automated BMI computation ($68\text{ kg} / 1.7\text{ m}^2 = 23.53\text{ kg/m}^2$), and primary diagnosis **ICD-10 A09** (*Gastroenteritis and colitis of unspecified origin*).
 3. **SatuSehat FHIR Dispatch**: Synchronized encounter payload, generating FHIR Encounter UUID and Condition UUID with complete audit response logging.
 
 ---
