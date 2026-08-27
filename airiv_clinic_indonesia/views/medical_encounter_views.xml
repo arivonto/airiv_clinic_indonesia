@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_medical_encounter_tree" model="ir.ui.view">
+            <field name="name">medical.encounter.list</field>
+            <field name="model">medical.encounter</field>
+            <field name="arch" type="xml">
+                <list string="Kunjungan &amp; RME">
+                    <field name="name"/>
+                    <field name="encounter_date"/>
+                    <field name="patient_id"/>
+                    <field name="practitioner_id"/>
+                    <field name="icd10_code"/>
+                    <field name="diagnosis_name"/>
+                    <field name="satusehat_sync_status" widget="badge"/>
+                    <field name="state" widget="badge"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_medical_encounter_form" model="ir.ui.view">
+            <field name="name">medical.encounter.form</field>
+            <field name="model">medical.encounter</field>
+            <field name="arch" type="xml">
+                <form string="Rekam Medis Elektronik (RME)">
+                    <header>
+                        <button name="action_start_examination" string="Mulai Pemeriksaan" type="object" class="btn-primary" invisible="state != 'draft'"/>
+                        <button name="action_send_to_pharmacy" string="Kirim ke Apotek" type="object" class="btn-primary" invisible="state != 'examination'"/>
+                        <button name="action_complete_encounter" string="Selesai &amp; Sinkron SatuSehat" type="object" class="btn-success" invisible="state != 'pharmacy'"/>
+                        <button name="action_sync_satusehat_fhir" string="Kirim Ulang FHIR SatuSehat" type="object" class="btn-secondary" invisible="state != 'done'"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,examination,pharmacy,done"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <span class="o_form_label">Nomor Kunjungan Pasien</span>
+                            <h1><field name="name" readonly="1"/></h1>
+                        </div>
+                        <group>
+                            <group string="Identitas Kunjungan">
+                                <field name="patient_id"/>
+                                <field name="patient_nik"/>
+                                <field name="practitioner_id"/>
+                            </group>
+                            <group string="Waktu &amp; Status Kemenkes">
+                                <field name="encounter_date"/>
+                                <field name="satusehat_sync_status" widget="badge"/>
+                                <field name="satusehat_encounter_id" invisible="not satusehat_encounter_id"/>
+                            </group>
+                        </group>
+
+                        <notebook>
+                            <!-- 1. Subjective -->
+                            <page string="1. Subjective (Anamnesis)">
+                                <group>
+                                    <field name="chief_complaint" placeholder="Keluhan utama pasien..."/>
+                                    <field name="medical_history" placeholder="Riwayat penyakit sekarang, dahulu, atau keluarga..."/>
+                                </group>
+                            </page>
+
+                            <!-- 2. Objective -->
+                            <page string="2. Objective (Tanda Vital &amp; Fisik)">
+                                <group>
+                                    <group string="Tanda-tanda Vital">
+                                        <label for="systolic" string="Tekanan Darah (mmHg)"/>
+                                        <div class="o_row">
+                                            <field name="systolic" class="oe_inline"/> / <field name="diastolic" class="oe_inline"/> mmHg
+                                        </div>
+                                        <field name="heart_rate"/>
+                                        <field name="respiratory_rate"/>
+                                        <field name="temperature"/>
+                                    </group>
+                                    <group string="Antropometri">
+                                        <field name="weight"/>
+                                        <field name="height"/>
+                                        <field name="bmi" class="font-weight-bold text-primary"/>
+                                    </group>
+                                </group>
+                                <group string="Pemeriksaan Fisik Khusus">
+                                    <field name="physical_exam" placeholder="Hasil pemeriksaan fisik kepala, toraks, abdomen, ekstremitas..."/>
+                                </group>
+                            </page>
+
+                            <!-- 3. Assessment -->
+                            <page string="3. Assessment (Diagnosa ICD-10)">
+                                <group>
+                                    <group string="Diagnosa Utama Kemenkes">
+                                        <field name="icd10_code" placeholder="misal: A09, I10, E11"/>
+                                        <field name="diagnosis_name"/>
+                                    </group>
+                                    <group string="Status Klinis">
+                                        <field name="clinical_status"/>
+                                    </group>
+                                </group>
+                            </page>
+
+                            <!-- 4. Plan -->
+                            <page string="4. Plan (Tindakan &amp; Resep)">
+                                <group>
+                                    <field name="therapy_plan" placeholder="Rencana edukasi medis, diet, dan rawat jalan..."/>
+                                    <field name="prescription_notes" placeholder="Daftar resep obat, dosis, dan signa (misal: Paracetamol 500mg 3x1 sesudah makan)..."/>
+                                </group>
+                            </page>
+
+                            <!-- SatuSehat FHIR Interoperability -->
+                            <page string="Log SatuSehat HL7 FHIR">
+                                <group>
+                                    <field name="satusehat_condition_id" readonly="1"/>
+                                    <field name="satusehat_response_log" readonly="1"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_medical_encounter" model="ir.actions.act_window">
+            <field name="name">Kunjungan Pasien &amp; RME</field>
+            <field name="res_model">medical.encounter</field>
+            <field name="view_mode">list,form</field>
+        </record>
+    </data>
+</odoo>

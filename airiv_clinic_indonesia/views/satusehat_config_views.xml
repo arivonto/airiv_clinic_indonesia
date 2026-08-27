@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_airiv_satusehat_config_form" model="ir.ui.view">
+            <field name="name">airiv.satusehat.config.form</field>
+            <field name="model">airiv.satusehat.config</field>
+            <field name="arch" type="xml">
+                <form string="Konfigurasi SatuSehat FHIR Kemenkes">
+                    <sheet>
+                        <div class="oe_title">
+                            <h1><field name="name"/></h1>
+                            <p class="text-muted">Interoperabilitas Rekam Medis Elektronik (RME) Standar HL7 FHIR Kemenkes RI</p>
+                        </div>
+                        <group>
+                            <group string="Mode Integrasi">
+                                <field name="environment" widget="radio"/>
+                                <field name="organization_id" placeholder="misal: 10085123"/>
+                                <field name="company_id"/>
+                            </group>
+                            <group string="Kredensial API (Jika Sandbox / Production)">
+                                <field name="client_id" invisible="environment == 'mock'"/>
+                                <field name="client_secret" invisible="environment == 'mock'"/>
+                                <field name="fhir_base_url" readonly="1"/>
+                            </group>
+                        </group>
+                        <div class="alert alert-info mt-3" role="alert">
+                            <strong>Local Simulation Mock Engine:</strong> Anda dapat langsung membuat rekam medis, anamnesis, vital signs, dan diagnosa ICD-10 secara instan tanpa perlu mendaftar akun developer Kemenkes terlebih dahulu.
+                        </div>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_airiv_satusehat_config" model="ir.actions.act_window">
+            <field name="name">Konfigurasi SatuSehat</field>
+            <field name="res_model">airiv.satusehat.config</field>
+            <field name="view_mode">list,form</field>
+        </record>
+    </data>
+</odoo>

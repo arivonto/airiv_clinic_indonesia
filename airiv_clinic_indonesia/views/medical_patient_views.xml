@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_medical_patient_tree" model="ir.ui.view">
+            <field name="name">medical.patient.list</field>
+            <field name="model">medical.patient</field>
+            <field name="arch" type="xml">
+                <list string="Data Pasien Klinik">
+                    <field name="patient_number"/>
+                    <field name="name" string="Nama Lengkap"/>
+                    <field name="nik"/>
+                    <field name="gender"/>
+                    <field name="birth_date"/>
+                    <field name="mobile"/>
+                    <field name="satusehat_ihis_id"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_medical_patient_form" model="ir.ui.view">
+            <field name="name">medical.patient.form</field>
+            <field name="model">medical.patient</field>
+            <field name="arch" type="xml">
+                <form string="Data Pasien">
+                    <sheet>
+                        <div class="oe_title">
+                            <span class="o_form_label">No. Rekam Medis (No. RM)</span>
+                            <h1><field name="patient_number" readonly="1"/></h1>
+                            <h2><field name="name" placeholder="Nama Lengkap Pasien Sesuai KTP"/></h2>
+                        </div>
+                        <group>
+                            <group string="Identitas &amp; SatuSehat">
+                                <field name="nik" placeholder="16 Digit NIK KTP"/>
+                                <field name="satusehat_ihis_id" placeholder="Otomatis / Terverifikasi Kemenkes"/>
+                                <field name="bpjs_number" placeholder="13 Digit No. BPJS (Opsional)"/>
+                            </group>
+                            <group string="Data Demografis">
+                                <field name="gender"/>
+                                <field name="birth_date"/>
+                                <field name="blood_type"/>
+                                <field name="mobile" placeholder="misal: 081234567890"/>
+                                <field name="email"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Riwayat Medis &amp; Alergi">
+                                <group>
+                                    <field name="allergy_history" placeholder="Riwayat alergi antibiotik, analgesik, atau makanan tertentu..."/>
+                                </group>
+                            </page>
+                            <page string="Riwayat Kunjungan RME">
+                                <field name="encounter_ids" readonly="1">
+                                    <list string="Daftar Kunjungan">
+                                        <field name="name"/>
+                                        <field name="encounter_date"/>
+                                        <field name="practitioner_id"/>
+                                        <field name="icd10_code"/>
+                                        <field name="diagnosis_name"/>
+                                        <field name="satusehat_sync_status" widget="badge"/>
+                                        <field name="state" widget="badge"/>
+                                    </list>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_medical_patient" model="ir.actions.act_window">
+            <field name="name">Data Pasien</field>
+            <field name="res_model">medical.patient</field>
+            <field name="view_mode">list,form</field>
+        </record>
+    </data>
+</odoo>

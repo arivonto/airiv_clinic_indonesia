@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_medical_patient_user,medical.patient.user,model_medical_patient,base.group_user,1,1,1,1
+access_medical_encounter_user,medical.encounter.user,model_medical_encounter,base.group_user,1,1,1,1
+access_airiv_satusehat_config_user,airiv.satusehat.config.user,model_airiv_satusehat_config,base.group_user,1,1,1,1
