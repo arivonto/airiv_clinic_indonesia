@@ -28,10 +28,11 @@ Core Capabilities:
 """,
     'author': 'Riv Cloud Management',
     'website': 'https://airiv.id',
+    'url': 'https://github.com/arivonto/airiv_clinic_indonesia/blob/18.0/static/description/index.html',
     'license': 'LGPL-3',
     'price': 0.0,
     'currency': 'EUR',
-    'depends': ['base', 'account', 'stock', 'point_of_sale'],
+    'depends': ['base', 'account', 'stock', 'point_of_sale', 'airiv_os_core'],
     'data': [
         'security/ir.model.access.csv',
         'data/icd10_initial_data.xml',

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <data>
     <data noupdate="1">
         <record id="seq_medical_patient" model="ir.sequence">
             <field name="name">No. Rekam Medis Pasien</field>
@@ -14,5 +15,6 @@
             <field name="prefix">ENC-%(year)s%(month)s-</field>
             <field name="padding">4</field>
         </record>
+    </data>
     </data>
 </odoo>

@@ -2,25 +2,46 @@
 <odoo>
     <data>
         <menuitem id="menu_clinic_root"
-                  name="Klinik &amp; RME"
-                  web_icon="airiv_clinic_indonesia,static/description/icon.png"
+                  name="AIRIV Klinik &amp; RME"
+                  action="airiv_os_core.action_airiv_launchpad_clinic"
+                  web_icon="airiv_clinic_indonesia,static/description/airiv_store_icon_128.png"
+                  sequence="20"/>
+
+        <menuitem id="menu_clinic_operations"
+                  name="Operasional"
+                  parent="menu_clinic_root"
+                  sequence="1"/>
+
+        <menuitem id="menu_clinic_records"
+                  name="Rekam Medis"
+                  parent="menu_clinic_root"
                   sequence="2"/>
+
+        <menuitem id="menu_clinic_services"
+                  name="Layanan Klinis"
+                  parent="menu_clinic_root"
+                  sequence="3"/>
+
+        <menuitem id="menu_clinic_integrations"
+                  name="Integrasi &amp; Pengaturan"
+                  parent="menu_clinic_root"
+                  sequence="9"/>
 
         <menuitem id="menu_clinic_patient"
                   name="Pendaftaran Pasien"
-                  parent="menu_clinic_root"
+                  parent="menu_clinic_operations"
                   action="action_medical_patient"
                   sequence="1"/>
 
         <menuitem id="menu_clinic_encounter"
                   name="Rekam Medis (SOAP)"
-                  parent="menu_clinic_root"
+                  parent="menu_clinic_records"
                   action="action_medical_encounter"
                   sequence="2"/>
 
         <menuitem id="menu_clinic_config"
                   name="Pengaturan SatuSehat"
-                  parent="menu_clinic_root"
+                  parent="menu_clinic_integrations"
                   action="action_airiv_satusehat_config"
                   sequence="10"/>
     </data>
