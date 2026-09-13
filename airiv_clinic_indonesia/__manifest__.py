@@ -26,7 +26,7 @@ Core Capabilities:
    - Direct integration with Point of Sale (POS) and Dynamic QRIS
 5. Zero External Server Overhead - 100% Odoo 18 Community Native - Always Free ($0.00).
 """,
-    'author': 'Riv Cloud Management',
+    'author': 'AIRIV',
     'website': 'https://airiv.id',
     'url': 'https://github.com/arivonto/airiv_clinic_indonesia/blob/18.0/static/description/index.html',
     'license': 'LGPL-3',
